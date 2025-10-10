@@ -1,0 +1,54 @@
+# Site settings
+title: Abhishu Oza
+description: Machine Learning Engineer & Researcher
+author: Abhishu Oza
+email: abhishu.oza@gmail.com
+url: "https://abhishuoza.github.io"
+baseurl: ""
+
+# Social links
+github_username: abhishuoza
+linkedin_username: abhishu-oza
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+
+# Permalink structure for blog posts
+permalink: /blog/:year/:month/:day/:title/
+
+# Exclude from processing
+exclude:
+  - README.md
+  - CLAUDE.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
