@@ -6,7 +6,7 @@ author: Abhishu Oza
 excerpt: "Arguments and resources for understanding why in the near future, AI may be able to do everything humans can do — and go beyond."
 ---
 
-I am a computer science major who’s been fascinated by neural networks — the basis of every interesting AI you see — ever since first learning about it. Over the past few months, I’ve read a lot more and deliberated with myself to figure out what is really going on. I think that this technology has immense power, and we are not discussing it with the seriousness and trepidation it deserves. 
+I am a computer science major who’s been fascinated by neural networks — the basis of every interesting AI you see — ever since first learning about it. Over the past few months, I’ve read a lot more and deliberated with myself to figure out what is really going on. I think this technology has immense power, and we are not discussing it with the seriousness and trepidation it deserves. 
 
 If we define transformative AI as systems which can truly automate all things humans do and beyond, it would not be a new fad or a just a cool new product. It would have a dramatic impact on every area of life. It would significantly improve human health, lifespan and well being. It would revamp all of science. It's course of development would influence the balance of national powers. I'm saying it is possible to create such systems, and that actually we could be approaching such technology in the coming decades.
 
@@ -48,15 +48,13 @@ Do not underestimate the power of algorithms. Civilisation is the product of hum
 
 ## 3. Findings of the last 13 years
 
-![AI's Potential Domains](/assets/images/blog/some_domains_AI_can_solve.webp)
-
 This is the most straightforward argument — AI capabilities have emerged at breakneck speed since the last 13 years. We went from simple detection task like classifying objects in images and speech recognition to high bandwidth tasks like image generation and language translation in about 4-5 years.  
 
 In 2017, DeepMind’s AlphaGo beat the then Go world champion Lee Sedol. This was very notable because the game tree for Go expands intractably quickly so future moves cannot be calculated by brute force, like you can with chess. By 2019, OpenAI Five defeated Dota2 world champions, a long horizon game with tens of thousands of actions. 
 
-In 2020, DeepMind’s AlphaFold 2 essentially [solved the protein folding problem](https://www.youtube.com/watch?v=P_fHJIYENdI) — a 50-year-old fundamental challenge in biology that enables dramatic speedups in drug design and even aids tackling non-biological problems like disposal of plastic waste. This work won David Baker, Demis Hassabis and John M. Jumper the 2024 Nobel Prize in Chemistry [^4]. 
+In 2020, DeepMind’s AlphaFold 2 [solved the protein folding problem](https://www.youtube.com/watch?v=P_fHJIYENdI) — a 50-year-old fundamental challenge in biology that enables dramatic speedups in drug design and even aids tackling non-biological problems like disposal of plastic waste. This work won David Baker, Demis Hassabis and John M. Jumper the 2024 Nobel Prize in Chemistry [^4]. 
 
-By this time, OpenAI had trained GPT-3, an expensive bet entirely made on the fact that [model performance scales smoothly with model size, dataset size, and the amount of compute used for training](https://www.youtube.com/watch?v=5eqRuVp65eY) for many orders of magnitude. In March of 2022, they figured out how to [train language models to follow instructions with human feedback](https://www.youtube.com/watch?v=T_X4XFwKX8k), a crucial step in making them follow a user's intent. They hosted ChatGPT in November of that year. It was the fastest growing app of all time, acquiring 100 million users in 2 months.
+By this time, OpenAI had trained GPT-3, an expensive bet entirely made on the fact that [model performance scales smoothly with model size, dataset size, and the amount of compute used for training](https://www.youtube.com/watch?v=5eqRuVp65eY) for many orders of magnitude. In March of 2022, they figured out how to train language models to follow instructions with human feedback, a crucial step in making them follow a user's intent. They hosted ChatGPT in November of that year. It was the fastest growing app of all time, acquiring 100 million users in 2 months.
 
 Yes, language models suffer from hallucinations. But have you tried the recent releases? I’d argue hallucinations have decreased significantly, and reliability is being worked on actively. We must not fall into the “god of the gaps” fallacy for AI. Despite some unreliability though, they’ve unlocked a whole wave of new capabilities along reasoning, coding and mathematics. Claude code in action is a sight to behold. And both OpenAI and DeepMind have recently developed advanced models that achieve gold medal at the International Mathematical Olympiad [^5]. 
 
