@@ -2,7 +2,12 @@
 layout: default
 ---
 
-<article>
+<nav class="post-banner" id="postBanner">
+    <a href="/blog/" class="back-button">← Back</a>
+    <h2 class="banner-title">Understanding AI</h2>
+</nav>
+
+<article class="blog-post-article">
     <header>
         <h1>{{ page.title }}</h1>
         <div class="post-meta">
@@ -19,8 +24,40 @@ layout: default
         {{ content }}
     </div>
 
-    <div class="links" style="margin-top: 60px;">
-        <a href="/blog/" class="link-button">← Back to Blog</a>
-        <a href="/" class="link-button">Home</a>
-    </div>
+    <nav class="post-navigation">
+        {% if page.previous.url %}
+        <a href="{{ page.previous.url }}" class="nav-prev">
+            <span class="nav-label">← Previous</span>
+            <span class="nav-title">{{ page.previous.title }}</span>
+        </a>
+        {% else %}
+        <span></span>
+        {% endif %}
+
+        {% if page.next.url %}
+        <a href="{{ page.next.url }}" class="nav-next">
+            <span class="nav-label">Next →</span>
+            <span class="nav-title">{{ page.next.title }}</span>
+        </a>
+        {% endif %}
+    </nav>
 </article>
+
+<script>
+let lastScrollTop = 0;
+const banner = document.getElementById('postBanner');
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop) {
+        // Scrolling down
+        banner.style.transform = 'translateY(-100%)';
+    } else {
+        // Scrolling up
+        banner.style.transform = 'translateY(0)';
+    }
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+}, false);
+</script>

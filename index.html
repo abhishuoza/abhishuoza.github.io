@@ -3,42 +3,29 @@ layout: default
 title: Home
 ---
 
+<nav class="home-nav">
+    <a href="/blog/" class="nav-link">Blog</a>
+</nav>
+
 <header>
-    <h1>{{ site.title }}</h1>
-    <p class="subtitle">{{ site.description }}</p>
+    <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 40px;">
+        <img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="Profile Photo" class="profile-image">
+        <div>
+            <h1>{{ site.title }}</h1>
+            <p class="subtitle">{{ site.description }}</p>
+        </div>
+    </div>
     <p class="bio">
-        Graduate student at Rutgers University specializing in Machine Learning and Computer Vision.
-        I work on deep learning models, time series forecasting, and geospatial data analysis.
-        Passionate about applying AI to solve real-world problems.
+        Graduate student specializing in Machine Learning and AI with practical experience in deep learning models, image processing, and geospatial data analysis. Skilled in Python, OpenCV, TensorFlow, and PyTorch, seeking opportunities to contribute to large-scale research projects.
+    </p>
+    <p class="email">
+        <strong>Email:</strong> <a href="mailto:abhishu.oza@gmail.com">abhishu.oza@gmail.com</a>
     </p>
 </header>
 
 <div class="links">
-    <a href="cv.pdf" class="link-button">CV</a>
+    <a href="cv.pdf" class="link-button" target="_blank">CV</a>
     <a href="https://github.com/{{ site.github_username }}" class="link-button" target="_blank">GitHub</a>
     <a href="https://linkedin.com/in/{{ site.linkedin_username }}" class="link-button" target="_blank">LinkedIn</a>
-    <a href="/blog/" class="link-button">Blog</a>
+    <a href="https://scholar.google.com/citations?hl=en&user=YGJ6XlsAAAAJ" class="link-button" target="_blank">Google Scholar</a>
 </div>
-
-<section class="section" id="blog">
-    <h2 class="section-title">Recent Posts</h2>
-
-    {% for post in site.posts limit:3 %}
-    <article class="blog-post">
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p class="date">{{ post.date | date: "%B %d, %Y" }}</p>
-        <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
-    </article>
-    {% endfor %}
-
-    {% if site.posts.size == 0 %}
-    <article class="blog-post">
-        <h3>Welcome to My Blog</h3>
-        <p class="date">January 2025</p>
-        <p>
-            Starting this blog to share my thoughts on machine learning, research updates,
-            and interesting problems I'm working on. Stay tuned for more content!
-        </p>
-    </article>
-    {% endif %}
-</section>

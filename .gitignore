@@ -19,3 +19,6 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Template files
+_posts/2025-01-01-markdown-template.md
