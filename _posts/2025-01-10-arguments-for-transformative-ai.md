@@ -47,6 +47,8 @@ It is true that the procedure human brains use to learn is quite different and m
 Do not underestimate the power of algorithms. Civilisation is the product of human brains, and our brains consist of nothing but inherited and learned algorithms. Our computers and learning procedures are now mature enough to find and run the right algorithms.
 
 ## 3. Findings of the last 13 years
+![Some Domains AI Can Solve](/assets/images/blog/some_domains_AI_can_solve.webp)
+
 
 This is the most straightforward argument — AI capabilities have emerged at breakneck speed since the last 13 years. We went from simple detection task like classifying objects in images and speech recognition to high bandwidth tasks like image generation and language translation in about 4-5 years.  
 
@@ -61,8 +63,6 @@ Yes, language models suffer from hallucinations. But have you tried the recent r
 It is astonishing to look back and see how much we have achieved in every imaginable domain, all in about a decade. Even more surprisingly, the core idea has remained the same. Often times one does not even need to change the model architecture even as they change the domain — discovering a new design for one task has a ripple effect over progress in all other tasks.   
 
 ## Impact
-
-![The Future](/assets/images/blog/the_future.webp)
 
 Powerful technology enhances the contrast on all aspects of life, the good and the bad.
 
