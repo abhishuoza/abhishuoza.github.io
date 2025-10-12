@@ -260,6 +260,8 @@ footer {
 @media (max-width: 768px) {
     h1 {
         font-size: 2rem;
+        margin-top: 80px;
+        text-align: center;
     }
 
     .container {
@@ -275,6 +277,15 @@ footer {
         flex-direction: column !important;
         text-align: center;
         gap: 20px !important;
+    }
+
+    header {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .subtitle {
+        text-align: center;
     }
 
     .links {
@@ -294,29 +305,46 @@ footer {
         font-size: 1.5rem;
     }
 
-    .home-nav, .blog-nav {
-        top: 20px;
-        left: 20px;
-        right: 20px;
+    .blog-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 15px 20px;
+        z-index: 100;
+        border-bottom: none;
+        display: flex;
+        justify-content: flex-start;
     }
 
     .home-nav {
+        position: absolute;
+        top: 20px;
         right: 20px;
-        left: auto;
+        background: transparent;
+        padding: 0;
     }
 
     .post-banner {
-        padding: 15px 20px;
+        padding: 12px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
 
     .back-button {
-        left: 20px;
-        padding: 6px 12px;
+        position: static;
+        padding: 0;
         font-size: 0.9rem;
+        margin: 0;
+        margin-left: -4px;
     }
 
     .banner-title {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+        text-align: left;
+        line-height: 1.2;
     }
 
     .post-navigation {
@@ -325,6 +353,10 @@ footer {
 
     .nav-prev, .nav-next {
         max-width: 100%;
+    }
+
+    .blog-post-article {
+        margin-top: 100px;
     }
 }
 
