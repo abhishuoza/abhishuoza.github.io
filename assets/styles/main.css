@@ -5,10 +5,10 @@
 }
 
 :root {
-    --bg-color: #ffffff;
+    --bg-color: #faf8f5;
     --text-color: #000000;
     --accent-color: #2563eb;
-    --secondary-bg: #f8f9fa;
+    --secondary-bg: #f0ede8;
     --border-color: #e0e0e0;
 }
 
@@ -261,6 +261,7 @@ footer {
     h1 {
         font-size: 2rem;
         margin-top: 80px;
+        margin-bottom: 5px;
         text-align: center;
     }
 
@@ -269,14 +270,15 @@ footer {
     }
 
     .profile-image {
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 200px;
     }
 
     header > div:first-child {
         flex-direction: column !important;
         text-align: center;
-        gap: 20px !important;
+        gap: 0px !important;
+        margin-bottom: 20px !important;
     }
 
     header {
@@ -310,7 +312,7 @@ footer {
         top: 0;
         left: 0;
         right: 0;
-        background: white;
+        background: var(--bg-color);
         padding: 15px 20px;
         z-index: 100;
         border-bottom: none;
@@ -387,7 +389,7 @@ footer {
     top: 0;
     left: 0;
     right: 0;
-    background: white;
+    background: var(--bg-color);
     color: black;
     padding: 15px 40px;
     display: flex;

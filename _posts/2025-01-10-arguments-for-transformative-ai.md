@@ -8,7 +8,7 @@ excerpt: "Arguments and resources for understanding why in the near future, AI m
 
 I am a computer science major who’s been fascinated by neural networks — the basis of every interesting AI you see — ever since first learning about it. Over the past few months, I’ve read a lot more and deliberated with myself to figure out what is really going on. I think this technology has immense power, and we are not discussing it with the seriousness and trepidation it deserves. 
 
-If we define transformative AI as systems which can truly automate all things humans do and beyond, it would not be a new fad or a just a cool new product. It would have a dramatic impact on every area of life. It would significantly improve human health, lifespan and well being. It would revamp all of science. It's course of development would influence the balance of national powers. I'm saying it is possible to create such systems, and that actually we could be approaching such technology in the coming decades.
+If we define transformative AI as systems which can truly automate all things humans do and beyond, it would not be a new fad or a just a cool new product. It would have a dramatic impact on every area of life. It would significantly improve human health, lifespan and well-being. It would revamp all of science. It's course of development would influence the balance of national powers. I'm saying it is possible to create such systems, and that actually we could be approaching such technology in the coming decades.
 
 Such a claim requires justification. In this post, I will try to lay down bedrock arguments for the possibility of such a radical future. I have linked to resources from where I learned myself. This also allows me to link to many good resources I’ve wanted to share for a long time. Please zoom in on any claims you are interested in by checking them out.
 
@@ -26,7 +26,7 @@ Thinking deeply about these limitations allowed Alan Turing to conceptualize the
 
 So computers are powerful things. The thesis implies that it is possible to simulate intelligence — or whatever you call the processes that happen inside the brain — in computers. All of the revolution of computers until the 2010s came through novel algorithms manually discovered and explicitly described by computer scientists. However, many crucial tasks, including basic things like recognizing objects in images (which biological brains do regularly on the fly) could not be cracked with manually designed algorithms. 
 
-## 2. Neural Networks can find algorithms
+## 2. Neural Networks
 
 ![Neural Network](/assets/images/blog/neural_network.webp)
 
@@ -46,11 +46,11 @@ It is true that the procedure human brains use to learn is quite different and m
 
 Do not underestimate the power of algorithms. Civilisation is the product of human brains, and our brains consist of nothing but inherited and learned algorithms. Our computers and learning procedures are now mature enough to find and run the right algorithms.
 
-## 3. Findings of the last 13 years
+## 3. Findings
 
 ![Some Domains AI Can Solve](/assets/images/blog/some_domains_AI_can_solve.webp)
 
-This is the most straightforward argument — AI capabilities have emerged at breakneck speed since the last 13 years. We went from simple detection task like classifying objects in images and speech recognition to high bandwidth tasks like image generation and language translation in about 4-5 years.  
+This is the most straightforward argument — AI capabilities have emerged at breakneck speed since the last 13 years. We went from simple detection tasks like classifying objects in images and speech recognition to high bandwidth tasks like image generation and language translation in about 4-5 years.  
 
 In 2017, DeepMind’s AlphaGo beat the then Go world champion Lee Sedol. This was very notable because the game tree for Go expands intractably quickly so future moves cannot be calculated by brute force, like you can with chess. By 2019, OpenAI Five defeated Dota2 world champions, a long horizon game with tens of thousands of actions. 
 
