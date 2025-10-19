@@ -48,18 +48,3 @@ abhishuoza.github.io/
 ├── index.html           # Home page
 └── cv.pdf               # Resume
 ```
-
-## Features
-
-- Dark theme with blue accents
-- Responsive design
-- Markdown blog posts
-- Automatic post listing
-- SEO optimization
-
-## Technologies
-
-- Jekyll (static site generator)
-- GitHub Pages (hosting)
-- Vanilla HTML/CSS/JavaScript
-- Markdown for blog posts
