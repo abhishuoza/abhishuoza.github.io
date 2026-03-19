@@ -1,27 +1,117 @@
-# Site settings
-title: Abhishu Oza
-description: Machine Learning Engineer & Researcher
-author: Abhishu Oza
-email: abhishu.oza@gmail.com
+# Theme
+remote_theme: "mmistakes/minimal-mistakes@4.26.2"
+minimal_mistakes_skin: "default"
+
+# Site Settings
+locale: "en-US"
+title: "Abhishu Oza"
+subtitle: "Machine Learning Engineer & Researcher"
+name: "Abhishu Oza"
+description: "Machine Learning Engineer & Researcher"
 url: "https://abhishuoza.github.io"
 baseurl: ""
+repository: "abhishuoza/abhishuoza.github.io"
 
-# Social links
-github_username: abhishuoza
-linkedin_username: abhishu-oza
+# Site Search
+search: true
+search_provider: lunr
 
-# Build settings
+# Author Sidebar
+author:
+  name: "Abhishu Oza"
+  avatar: "/assets/images/profile.jpg"
+  bio: "Graduate student specializing in Machine Learning and AI."
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:abhishu.oza@gmail.com"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/abhishuoza"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/abhishu-oza"
+    - label: "Google Scholar"
+      icon: "fas fa-fw fa-graduation-cap"
+      url: "https://scholar.google.com/citations?hl=en&user=YGJ6XlsAAAAJ"
+
+# Footer
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/abhishuoza"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/abhishu-oza"
+
+# Reading
+words_per_minute: 200
+read_time: true
+show_date: true
+date_format: "%B %-d, %Y"
+
+# Build Settings
 markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    css_class: 'highlight'
 
-# Permalink structure for blog posts
+# Permalink
 permalink: /blog/:year/:month/:day/:title/
 
-# Exclude from processing
+# Collections
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection/:path/
+
+# Front Matter Defaults
+defaults:
+  # Posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      share: true
+      related: true
+  # Pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+  # Portfolio
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author_profile: false
+      share: true
+
+# Pagination
+paginate: 5
+paginate_path: /page:num/
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache
+  - jekyll-seo-tag
+
+# Include
+include:
+  - _pages
+
+# Exclude
 exclude:
   - README.md
   - CLAUDE.md
@@ -30,25 +120,12 @@ exclude:
   - node_modules
   - vendor
 
-# Collections
-collections:
-  posts:
-    output: true
-    permalink: /blog/:year/:month/:day/:title/
+# Analytics (GoatCounter)
+analytics:
+  provider: "custom"
 
-# Defaults
-defaults:
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-    values:
-      layout: "default"
-
-# Plugins
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
+# HTML Compression
+compress_html:
+  clippings: all
+  ignore:
+    envs: development
