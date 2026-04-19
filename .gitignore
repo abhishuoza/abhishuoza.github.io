@@ -25,3 +25,9 @@ _posts/2025-01-01-markdown-template.md
 
 # Local documentation
 CSS-STYLING-GUIDE.md
+
+# Claude Code local settings
+.claude/
+
+# Standalone browser smoke tests (not part of the site)
+assets/demos/

@@ -1,0 +1,59 @@
+{% if page.math %}
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [["$", "$"], ["\\(", "\\)"]],
+      displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+      processEscapes: true,
+    },
+    options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] },
+    svg: { fontCache: "global" },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+{% endif %}
+
+{% if page.github %}
+<meta name="page-github" content="{{ page.github }}">
+<style>
+  .page__title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  .page__title-row .page__title {
+    margin: 0;
+    flex: 1 1 auto;
+  }
+  .page__title-row .page__github-btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    margin-top: 0;
+  }
+  .page__title-row .page__github-btn .fab { margin-right: 0.35em; }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var meta = document.querySelector('meta[name="page-github"]');
+    if (!meta) return;
+    var url = meta.getAttribute("content");
+    var title = document.querySelector(".page__title");
+    if (!title || !url) return;
+    var row = document.createElement("div");
+    row.className = "page__title-row";
+    title.parentNode.insertBefore(row, title);
+    row.appendChild(title);
+    var btn = document.createElement("a");
+    btn.href = url;
+    btn.target = "_blank";
+    btn.rel = "noopener noreferrer";
+    btn.className = "btn btn--primary page__github-btn";
+    btn.innerHTML = '<i class="fab fa-github" aria-hidden="true"></i> View on GitHub';
+    row.appendChild(btn);
+  });
+</script>
+{% endif %}
