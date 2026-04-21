@@ -356,18 +356,21 @@ classes: wide
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js"></script>
 <script type="module" src="/assets/js/connect4/app.js"></script>
 
+I did a from-scratch implementation of [AlphaZero](https://deepmind.google/discover/blog/alphazero-shedding-new-light-on-chess-shogi-and-go/) and created a Connect 4 playing AI! The model you're playing above has learned entirely by playing with itself: it used no human games, no opening books, no evaluation heuristics.
+
+Turn on **Nerdy mode** to watch the network's thinking: for the AI's last turn, you see the neural network's policy combined with Monte-Carlo Tree Search, along with a value estimate between −1 (losing) and +1 (winning) from the AI's perspective.
 
 Stack: Python, PyTorch, NumPy. Browser port uses onnxruntime-web.
 
 ## About this project
 
-I did a from-scratch implementation of [AlphaZero](https://deepmind.google/discover/blog/alphazero-shedding-new-light-on-chess-shogi-and-go/) and created a Connect 4 playing AI! The model you're playing above has learned entirely by playing with itself: it used no human games, no opening books, no evaluation heuristics.
-
-Turn on **Nerdy mode** to watch the network's thinking: for the AI's last turn, you see the neural network's policy combined with Monte-Carlo Tree Search, along with a value estimate between −1 (losing) and +1 (winning) from the AI's perspective.
-
 Game playing AI has been an important milestone for scientists working on AI, because it's a controlled microcosm of the world where we can test how good an algorithm is, by seeing how what games it can play and the level of mastery it can achieve. IBM famously created DeepBlue to beat Garry Kasparov the world chess champion for the first time. However, DeepBlue was not a general AI because it had chess playing heuristics built in: openings, specific strategies etc. In a very real sense it was not AI because the same algorithm cannot be run on any game to learn it.
 
 After Neural Networks came to the scene, DeepMind was the first to aggresively push on their ability to learn good strategies for games. AlphaZero was the culmination of this approach because it was the first algorithm that can learn virtually any difficult 2 player game and beat the best human players of the world, by doing nothing other than learning by playing games against itself!
+
+Now admittedly Connect 4 is contained enough that it can be [solved via classical algorithms](http://blog.gamesolver.org/solving-connect-four/01-introduction/). However, AlphaZero can generalize to difficult 2 player games (like Chess and Go) and can become superhuman with enough training time (it's predecessor algorithm AlphaGo famously beat Lee sedol in 2016). Alphazero was a landmark moment for AI because it proved that neural networks can generalize in a way classical algorithms cannot. Making this was a way for me to understand the algorithm and witness the magic in a more visceral way (perhaps one day I'll try to train a really good Chess AI with it too...)
+
+Current AIs are trained with a [surprisingly similar paradigm](https://x.com/polynoamial/status/2031404079583473953) - one of the key newer stages in LLM training is to sample a trajectory (recursively querying the LLM as opposed to a tree search in AlphaZero) and then rewarding it based on the end outcome (eg. whether it correctly solved a math problem as opposed to whether it won the game for AlphaZero).
 
 ## AlphaZero
 

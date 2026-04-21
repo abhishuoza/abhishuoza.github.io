@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Uncertainty Direction in LLMs"
 excerpt: "Investigating whether uncertainty can be represented as a linear direction in large language model activation space."
 date: 2024-12-01

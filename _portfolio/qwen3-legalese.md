@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Qwen3-8B Legalese Finetuning"
 excerpt: "Finetuned Qwen3-8B on legal datasets for improved legal text understanding and generation."
 date: 2025-03-01

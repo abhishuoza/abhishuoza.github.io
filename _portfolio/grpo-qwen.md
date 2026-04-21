@@ -1,4 +1,5 @@
 ---
+published: false
 title: "GRPO Qwen"
 excerpt: "Training Qwen2.5-1.5B-Instruct on math reasoning using Group Relative Policy Optimization with QLoRA on a single consumer GPU."
 date: 2025-02-01
