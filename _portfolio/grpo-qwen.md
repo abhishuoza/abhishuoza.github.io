@@ -247,9 +247,33 @@ So, the total cost will be 16 × ($5 + 0.6 × $5).
 
 Therefore, Kylar needs to pay $280 for the glasses.
 &lt;answer&gt;280&lt;/answer&gt;<span class="grpo-meta">Format is pristine; the algebra treats every glass as a 60%-glass instead of every second one. Still wrong, but now wrong in a way a human can spot.</span></pre></div>
+
+  <div class="grpo-q"><strong>Q4.</strong> Eliza's rate per hour for the first 40 hours is $10. Overtime pay is 1.2× her regular rate. She worked 45 hours this week. What are her earnings? <span class="grpo-meta">Ground truth: 460</span></div>
+  <div class="grpo-bad"><h4>Baseline (arithmetic slip)</h4><pre>Regular pay = Regular rate × Hours worked
+Regular pay = $10 × 40
+
+Overtime pay = 1.2 × (10 × 40)
+
+Let's perform these calculations:
+- Regular pay: $10 × 40 = $40
+- Overtime pay: 1.2 × ($10 × 40) = 1.2 × $40 = $48
+- Total earnings: $40 + $48 = $88
+
+Therefore, Eliza's total earnings for the week are $88.<span class="grpo-meta">Sets up the right decomposition, then asserts $10 × 40 = $40 and everything downstream is wrong. Also never separates the 5 overtime hours from the 40 regular ones.</span></pre></div>
+  <div class="grpo-ok"><h4>Trained</h4><pre>&lt;reasoning&gt;
+Regular earnings = $10/hour × 40 hours = $400
+
+Overtime hours = 45 − 40 = 5 hours
+Overtime pay rate = 1.2 × $10/hour = $12/hour
+Overtime earnings = $12/hour × 5 hours = $60
+
+Total earnings = $400 + $60 = $460
+&lt;/reasoning&gt;
+
+&lt;answer&gt;460&lt;/answer&gt;<span class="grpo-meta">Correctly separates regular vs overtime hours, gets the arithmetic right, tags the answer.</span></pre></div>
 </div>
 
-Q3 is the most honest picture of what this training run accomplished. The baseline collapses into a token-level loop; the trained model stays coherent, lays out its reasoning, and produces a clean tagged answer even when the algebra is off. GRPO at 1.5B teaches structure and stability; the bulk of the math wins comes from that stability plus moderate improvements to the reasoning itself, not from turning a small model into a calculator.
+Q3 and Q4 together are the honest picture. Q3 shows the baseline collapsing into a token-level loop while the trained model stays coherent and produces a clean tagged answer (even when its algebra is off); Q4 shows a case where GRPO genuinely lifted the model's reasoning quality and the trained output is a strict win over the baseline. GRPO at 1.5B teaches structure and stability first, and on top of that stability it also moves the needle on math — the lenient delta of +16.7 pts is made up of wins like Q4.
 
 ## GRPO in one paragraph
 
