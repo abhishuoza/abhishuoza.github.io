@@ -1,9 +1,14 @@
 ---
-layout: post
 title: "Arguments for transformative AI"
-date: 2025-10-10
+date: 2025-01-10
 author: Abhishu Oza
 excerpt: "Arguments and resources for understanding why in the near future, AI may be able to do everything humans can do — and go beyond."
+categories:
+  - AI
+tags:
+  - transformative AI
+  - machine learning
+  - research
 ---
 
 I am a computer science major who’s been fascinated by neural networks — the basis of every interesting AI you see — ever since first learning about it. Over the past few months, I’ve read a lot more and deliberated with myself to figure out what is really going on. I think this technology has immense power, and we are not discussing it with the seriousness and trepidation it deserves. 
