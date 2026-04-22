@@ -48,7 +48,6 @@ footer:
 # Reading
 words_per_minute: 200
 read_time: true
-show_date: true
 date_format: "%B %-d, %Y"
 
 # Build Settings
