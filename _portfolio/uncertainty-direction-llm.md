@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Looking for an Uncertainty Direction in GPT-2"
 excerpt: "A mechanistic interpretability attempt to find a linear direction in activation space that encodes uncertainty. A null result, visualized."
 date: 2024-12-01
