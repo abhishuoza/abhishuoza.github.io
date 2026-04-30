@@ -61,9 +61,9 @@ Stack: Python, Typer, FastAPI, LangChain, ChromaDB, sentence-transformers. LLM b
 
 ## About this project
 
-The rise of sophisticated coding agents are leading to the major AI companies pushing towards longer and longer autonomy in systems, and admittedly it is the direction with the highest ROI. However I do think that in vigorously pursuing this direction, we are missing out on building tools that are smart, yet deterministic and reliable, which can be built upon. The open source community has a great opportunity to capitalize on this.
+The rise of sophisticated coding agents is leading the major AI companies to push towards longer and longer autonomy in systems, and admittedly it is the direction with the highest ROI. However, I do think that in vigorously pursuing this direction, we are missing out on building tools that are smart, yet deterministic and reliable, which can be built upon. The open source community has a great opportunity to capitalize on this.
 
-DocRAG is an instance of pursuing this direction. Rather than centering it around the model intelligence, I've approached centerering it around updated documentation. 
+DocRAG is an instance of pursuing this direction. Rather than centering it around the model intelligence, I've approached centering it around updated documentation.
 
 DocRAG works both as a CLI tool and a REST API powered by FastAPI, so you can use it from the terminal or integrate it into other tools. The packaging follows a thin-client / fat-server model: `pip install docrag` gives you a lightweight CLI (~50 MB) while heavy ML dependencies remain optional. If you'd rather not run the pipeline locally, the `--remote` flag lets you point the CLI at a remote DocRAG server instead. On the LLM side, DocRAG supports multiple backends including OpenAI, Anthropic, and local models such as Qwen2.5-Coder via HuggingFace Transformers. A TTL-based document cache avoids re-scraping pages you've already indexed, and built-in low-relevance warnings flag when retrieved context scores poorly so you know the output is falling back on general knowledge. For deployment, a single `docker compose up` command gets the full stack running.
 
@@ -108,7 +108,7 @@ There's also a REST API (`uvicorn docrag.api:app`) and a `docker compose up` tha
 
 ## Musings
 
-No matter how large context windows get, you can never fit the scale of the web, and keyword search is bound to miss important things that could be relevant for a project. I see novel embedding models in a well implemented RAG system as way to extract the best knowledge possible from the web. Atleast my intuition here is that this direction is underexplored.
+No matter how large context windows get, you can never fit the scale of the web, and keyword search is bound to miss important things that could be relevant for a project. I see novel embedding models in a well-implemented RAG system as a way to extract the best knowledge possible from the web. At least my intuition here is that this direction is underexplored.
 
 ## Resources
 

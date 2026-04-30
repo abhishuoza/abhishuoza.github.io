@@ -84,7 +84,7 @@ classes: wide
 }
 </style>
 
-Training [Qwen2.5-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct) on GSM8K math word problems with Group Relative Policy Optimization (GRPO), the RL technique behind DeepSeek-R1. With a LoRA adapter on 8 A4000 GPUs (4 running a vLLM generation server, 4 doing DDP training), strict accuracy goes from 1.7% to 48.7% in 2 epochs.
+Training [Qwen2.5-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct) on GSM8K math word problems with Group Relative Policy Optimization (GRPO), the RL technique behind DeepSeek-R1. A LoRA adapter, 8 A4000s split 4/4 between a vLLM generation server and DDP training, 2 epochs: strict accuracy climbs from 1.7% to 48.7%.
 
 | Model | Strict | Lenient |
 |---|---|---|
@@ -92,11 +92,11 @@ Training [Qwen2.5-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instru
 | + GRPO (ours) | **48.7%** | **55.0%** |
 | Δ | **+47.0 pts** | **+16.7 pts** |
 
-Strict counts only answers inside `<answer>` tags; lenient falls back to the last number in the output. The baseline mostly knows the math, it just doesn't use the required format, so its strict score is near zero even though its lenient is respectable. After training, the model reliably emits the `<reasoning>/<answer>` XML structure, and its math improves meaningfully on top of that.
+Strict counts answers inside `<answer>` tags; lenient falls back to the last number in the output. The baseline mostly knows the math but won't use the required format, so strict is near zero. After training the model reliably emits the XML structure and its math improves on top of that.
 
 ## Training dynamics
 
-Below are the training curves, pulled from the final checkpoint's `trainer_state.json` (one point every 10 optimizer steps, 3,738 total over 2 epochs).
+Training curves pulled from the final checkpoint's `trainer_state.json` (one point every 10 steps, 3,738 total over 2 epochs).
 
 <div id="grpo-plot-wrap">
   <canvas id="grpo-plot-canvas"></canvas>
@@ -186,11 +186,11 @@ Below are the training curves, pulled from the final checkpoint's `trainer_state
 })();
 </script>
 
-The format reward climbs fastest. Within the first few hundred steps the model has already figured out that wrapping its answer in `<reasoning>/<answer>` is a reliable source of signal, and that component saturates near 0.9. Correctness creeps up more slowly: it takes the full first epoch to get above 0.5 and continues improving through epoch 2. KL divergence from the base model stays small (beta = 0.01 is a deliberately light leash on a 1.5B model), which matters because we want to preserve the instruct model's general capabilities rather than overwrite them. Total reward (the three components weighted 2.0 / 0.5 / 0.5) rises from ~0.7 to ~2.5.
+As expected, format reward saturates within a few hundred steps as wrapping the answer in `<reasoning>/<answer>` is the easiest signal to pick up. Correctness creeps up over the full run and is still climbing by epoch 2. KL to the base model stays small ($\beta = 0.01$), so the instruct model's general capabilities survive. Total reward rises from ~0.7 to ~2.5.
 
 ## Before and after
 
-Same three GSM8K test questions, same greedy-decode settings, run through the baseline model and the GRPO-trained model.
+Two GSM8K test questions, same greedy-decode settings, run through the baseline model and the GRPO-trained model.
 
 <div class="grpo-compare">
   <div class="grpo-q"><strong>Q1.</strong> James decides to run 3 sprints 3 times a week. He runs 60 meters each sprint. How many total meters does he run a week? <span class="grpo-meta">Ground truth: 540</span></div>
@@ -211,44 +211,7 @@ Each sprint is 60 meters long, so James runs a total of
 &lt;/reasoning&gt;
 &lt;answer&gt;540&lt;/answer&gt;<span class="grpo-meta">Right answer, right format → credit under both.</span></pre></div>
 
-  <div class="grpo-q"><strong>Q2.</strong> A robe takes 2 bolts of blue fiber and half that much white fiber. How many bolts in total does it take? <span class="grpo-meta">Ground truth: 3</span></div>
-  <div class="grpo-ok"><h4>Baseline</h4><pre>... Half of 2 bolts is 1 bolt.
-Blue fiber: 2 bolts
-White fiber: 1 bolt
-Total bolts = 2 + 1 = 3 bolts
-
-Therefore, the total number of bolts needed is 3.
-
-&lt;answer&gt;3&lt;/answer&gt;<span class="grpo-meta">Accidentally emits the tag. Easy problem, both models get it.</span></pre></div>
-  <div class="grpo-ok"><h4>Trained</h4><pre>&lt;reasoning&gt;
-The robe requires 2 bolts of blue fiber.
-It also requires half that amount of white fiber, which is 1 bolt
-(half of 2).
-Therefore, the total number of bolts required is 2 + 1 = 3.
-&lt;/reasoning&gt;
-&lt;answer&gt;3&lt;/answer&gt;<span class="grpo-meta">Tighter, no preamble.</span></pre></div>
-
-  <div class="grpo-q"><strong>Q3.</strong> One glass costs $5; every second glass costs 60% of that. Kylar buys 16. What does he pay? <span class="grpo-meta">Ground truth: 64</span></div>
-  <div class="grpo-bad"><h4>Baseline (catastrophic loop)</h4><pre>... Price per additional glass = $5 × 3/5 = $3
-Total cost for additional glasses = 8 × $3 = $24
-
-Now, adding the cost of all 16 glasses together:
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
-[... repeats until max_new_tokens]<span class="grpo-meta">Correct math at the top, then falls into a LaTeX whitespace loop and never emits an answer. A classic small-model failure mode.</span></pre></div>
-  <div class="grpo-bad"><h4>Trained (clean format, wrong math)</h4><pre>&lt;reasoning&gt;
-The cost of each glass is $5.
-Every second glass costs 60% of the price, so it costs
-0.6 × $5 = $3.
-Kylar wants to buy 16 glasses in total.
-So, the total cost will be 16 × ($5 + 0.6 × $5).
-&lt;/reasoning&gt;
-(16) × ($5 + 0.6 × $5) = 280
-
-Therefore, Kylar needs to pay $280 for the glasses.
-&lt;answer&gt;280&lt;/answer&gt;<span class="grpo-meta">Format is pristine; the algebra treats every glass as a 60%-glass instead of every second one. Still wrong, but now wrong in a way a human can spot.</span></pre></div>
-
-  <div class="grpo-q"><strong>Q4.</strong> Eliza's rate per hour for the first 40 hours is $10. Overtime pay is 1.2× her regular rate. She worked 45 hours this week. What are her earnings? <span class="grpo-meta">Ground truth: 460</span></div>
+  <div class="grpo-q"><strong>Q2.</strong> Eliza's rate per hour for the first 40 hours is $10. Overtime pay is 1.2× her regular rate. She worked 45 hours this week. What are her earnings? <span class="grpo-meta">Ground truth: 460</span></div>
   <div class="grpo-bad"><h4>Baseline (arithmetic slip)</h4><pre>Regular pay = Regular rate × Hours worked
 Regular pay = $10 × 40
 
@@ -259,7 +222,7 @@ Let's perform these calculations:
 - Overtime pay: 1.2 × ($10 × 40) = 1.2 × $40 = $48
 - Total earnings: $40 + $48 = $88
 
-Therefore, Eliza's total earnings for the week are $88.<span class="grpo-meta">Sets up the right decomposition, then asserts $10 × 40 = $40 and everything downstream is wrong. Also never separates the 5 overtime hours from the 40 regular ones.</span></pre></div>
+Therefore, Eliza's total earnings for the week are $88.<span class="grpo-meta">Sets up the right decomposition, then asserts $10 × 40 = $40 and cascades the error downstream. Never separates the 5 overtime hours from the 40 regular ones either.</span></pre></div>
   <div class="grpo-ok"><h4>Trained</h4><pre>&lt;reasoning&gt;
 Regular earnings = $10/hour × 40 hours = $400
 
@@ -270,20 +233,26 @@ Overtime earnings = $12/hour × 5 hours = $60
 Total earnings = $400 + $60 = $460
 &lt;/reasoning&gt;
 
-&lt;answer&gt;460&lt;/answer&gt;<span class="grpo-meta">Correctly separates regular vs overtime hours, gets the arithmetic right, tags the answer.</span></pre></div>
+&lt;answer&gt;460&lt;/answer&gt;<span class="grpo-meta">Correctly separates regular vs overtime hours, keeps its bookkeeping clean, tags the answer.</span></pre></div>
 </div>
 
-Q3 and Q4 together are the honest picture. Q3 shows the baseline collapsing into a token-level loop while the trained model stays coherent and produces a clean tagged answer (even when its algebra is off); Q4 shows a case where GRPO genuinely lifted the model's reasoning quality and the trained output is a strict win over the baseline. GRPO at 1.5B teaches structure and stability first, and on top of that stability it also moves the needle on math — the lenient delta of +16.7 pts is made up of wins like Q4.
+Q1 is the easy win: baseline knew the answer, just wouldn't tag it. In Q2, the baseline sets up the right decomposition, asserts `$10 × 40 = $40` in the first step, and never recovers; the trained model keeps its steps clear and answers $460. Most of the +16.7 lenient points look like Q2: GRPO pressuring the model to keep its steps clear.
 
-## GRPO in one paragraph
+## About this project
 
-GRPO ([Shao et al., 2024](https://arxiv.org/abs/2402.03300)) removes the reward model from PPO. For each prompt in a batch, you sample a group of $G$ completions from the current policy. Each completion gets a scalar reward (here, a weighted sum of three rule-based functions: correctness, format, int-in-answer). Advantages are computed relative to the *group* mean and std, so the update pushes above-average completions up and below-average completions down, with no separate value network. A KL penalty to the base model prevents catastrophic drift. Formally:
+Reinforcement learning is an important pillar of ML because you can formulate any problem as an RL problem. Give an agent a way to act, a way to observe, and a scalar reward at the end, and the same algorithm can teach it to balance a cart-pole, [beat Lee Sedol at Go](/portfolio/connect4-alphazero/), stack cups on a table, or solve competition math. The only changes are the policy (an MLP for cart-pole, a 1.5B transformer here) and the reward. This is why marrying it with neural networks (which are basically giant learnable circuits that can represent any algorithm in the Turing sense) has proven to be so powerful.
 
-$$J_{\text{GRPO}}(\theta) = \mathbb{E}_{q \sim D,\, \{o_i\}_{i=1}^{G} \sim \pi_{\theta_{\text{old}}}}\!\left[\frac{1}{G}\sum_{i=1}^{G} \min\!\left(r_i(\theta)\, A_i,\; \text{clip}\!\left(r_i(\theta), 1\pm\epsilon\right) A_i\right)\right] - \beta\, D_{\text{KL}}(\pi_\theta \Vert \pi_{\text{ref}})$$
+So much generality comes at the cost of underspecification and the tendency for model collapse. To train models that can be useful beyond toy tasks, you have to deal with exploration cost and reward variance. PPO ([Schulman et al., 2017](https://arxiv.org/abs/1707.06347)) was the main policy-gradient algorithm for a decade. You sample trajectories under the current policy, compute an advantage against a baseline, and take a gradient step *clipped* so the new policy can't stray too far from the old one on any single action. The clip is what made policy gradients stable enough to run for millions of iterations without collapse. PPO is the algorithm inside the original ChatGPT RLHF pipeline.
 
-where $r_i(\theta) = \pi_\theta(o_i \mid q) / \pi_{\theta_{\text{old}}}(o_i \mid q)$ and $A_i = (R_i - \text{mean}(R)) / \text{std}(R)$ is the group-normalized advantage. The PPO-style clipped ratio keeps updates conservative per step.
+PPO's baseline comes from a *critic*: a learned value network almost as big as the policy. GRPO ([Shao et al., 2024](https://arxiv.org/abs/2402.03300)) removes the critic. For each prompt, it samples a group of $G$ completions, scores all of them, and uses the group's own mean and std as the baseline, $A_i = (R_i - \text{mean}(R)) / \text{std}(R)$. Above-average completions get pushed up, below-average ones get pushed down, and no second network can drift from the true reward. The PPO clipped ratio and KL-to-base remain:
 
-This plays well with rule-based rewards for tasks that have a verifier: math (check the number), code (run the tests), constrained generation (check the grammar). No reward model to train, no preference data to collect.
+$$J_{\text{GRPO}}(\theta) = \mathbb{E}_{q \sim D,\, \{o_i\} \sim \pi_{\theta_{\text{old}}}}\!\left[\frac{1}{G}\sum_{i=1}^{G} \min\!\left(r_i(\theta)\, A_i,\; \text{clip}\!\left(r_i(\theta), 1\pm\epsilon\right) A_i\right)\right] - \beta\, D_{\text{KL}}(\pi_\theta \Vert \pi_{\text{ref}})$$
+
+with $r_i(\theta) = \pi_\theta(o_i \mid q) / \pi_{\theta_{\text{old}}}(o_i \mid q)$.
+
+This takes away the rest of the old RLHF stack as well, no learned reward model means there is no preference data to collect. All you need to do is sample completions, check them with a verifier, and update. The verifier can be anything deterministic, eg. a math checker, a unit-test runner, a theorem prover or a compiler. DeepSeek-R1 ([DeepSeek-AI, 2025](https://arxiv.org/abs/2501.12948)) scaled this loop into a reasoning model competitive with the strongest frontier models in early 2025. This project is the miniature version I created to wrap my head around this loop.
+
+We see so many tasks out there that don't have fully deterministic rewards but are still very specific; humans can clearly tell right from wrong for them. This gives me a feeling that future AI will involve creating complex yet robust reward models, alongside specific RL algorithms designed to learn well from such reward models.
 
 ## Setup
 
@@ -298,15 +267,11 @@ This plays well with rule-based rewards for tasks that have a verifier: math (ch
 | Effective batch | 2 × 8 generations × 4 accumulation = 64 |
 | Hardware | 8× RTX A4000 (16GB) — 4 for vLLM generation, 4 for DDP training |
 
-Two operational notes worth calling out:
-
-**vLLM as a separate generation server.** GRPO's bottleneck is autoregressive sampling, not the gradient step: every optimizer step needs $G = 8$ completions per prompt, which dwarfs the training compute. TRL supports ([docs](https://huggingface.co/docs/trl/main/en/speeding_up_training#vllm-for-fast-generation-in-online-methods)) running vLLM on a dedicated set of GPUs as an HTTP server that the trainer hits for sampling. On the iLab cluster this meant 4 A4000s running `trl vllm-serve` with the current policy weights hot-reloaded, and 4 others running `accelerate launch` with DDP. Without this split, wall-clock per step was dominated by the sampler.
-
-**LoRA instead of full fine-tuning.** The adapter is 17 MB and trains in bf16. The base model stays frozen, which means the KL-to-base term is computed against weights we're guaranteed to still have, and the adapter can be turned off at inference if we want the original model back. On consumer GPUs a rank-16 LoRA is also the difference between "fits on one card" and "doesn't fit."
+We tell ourselves we understand something just by reading it, but there's truly no substitution to implementing something. One simple thing I learned was to use vLLM as a separate generation server. When doing online RL on LLMs, sampling is the true bottleneck, not the gradient step. Every optimizer step needs $G = 8$ completions per prompt and completions take hundreds of sequential steps, which dwarfs the training compute. TRL [supports](https://huggingface.co/docs/trl/main/en/speeding_up_training#vllm-for-fast-generation-in-online-methods) running vLLM on dedicated GPUs as an HTTP sampling server with hot-reloaded policy weights, here 4 A4000s are serving and 4 are doing DDP.
 
 ## Takeaways
 
-The biggest jump here (1.7% → 48.7% strict, a 47-point delta) is almost entirely format compliance. The lenient-accuracy delta is the more honest measurement of "did the model get smarter at math," and it's +16.7 points, which is still substantial for a 1.5B model trained for two epochs on 7.5k examples. For bigger wins you'd want a bigger base model, longer generations that allow real multi-step scratch work, and probably curriculum over problem difficulty. But as a proof that GRPO works at small scale on commodity GPUs, with no reward model and no preference data, this is encouraging.
+Most of the 47-point strict delta is format compliance. The +16.7 lenient delta is the honest "did math reasoning improve" number, still substantial for 1.5B parameters on two epochs of 7.5k examples. Bigger gains would want a bigger base model and longer generations for multi-step scratch work, but as a proof that GRPO runs on commodity GPUs with no reward model and no preference data, pretty encouraging. It's also just cool that I can teach an AI how to do math in English, like wtf we are literally living in the future.
 
 ## Resources
 
@@ -314,8 +279,14 @@ The biggest jump here (1.7% → 48.7% strict, a 47-point delta) is almost entire
 
 - Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Zhang, M., Li, Y., Wu, Y., & Guo, D. (2024). [DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models](https://arxiv.org/abs/2402.03300). Introduces GRPO.
 - DeepSeek-AI. (2025). [DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2501.12948). The GRPO-at-scale result that sparked the wider interest.
-- Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). [Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347). The PPO backbone GRPO builds on.
+- Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). [Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347). Proposed PPO, what GRPO builds on.
 - Cobbe, K., Kosaraju, V., Bavarian, M., Chen, M., Jun, H., Kaiser, L., Plappert, M., Tworek, J., Hilton, J., Nakano, R., Hesse, C., & Schulman, J. (2021). [Training Verifiers to Solve Math Word Problems](https://arxiv.org/abs/2110.14168). The GSM8K dataset.
+
+**Explainers**
+
+- [RL By The Book](https://youtube.com/playlist?list=PLzvYlJMoZ02Dxtwe-MmH4nOB5jYlMGBjr) (Mutual Information). A dense walkthrough of RL, a great resource.
+- [PPO explainer](https://youtu.be/8jtAzxUwDj0) (Julia Turc).
+- [GRPO explainer](https://youtu.be/xT4jxQUl0X8) (Julia Turc).
 
 **Libraries**
 

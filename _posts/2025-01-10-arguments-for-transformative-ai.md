@@ -11,9 +11,9 @@ tags:
   - research
 ---
 
-I am a computer science major who’s been fascinated by neural networks — the basis of every interesting AI you see — ever since first learning about it. Over the past few months, I’ve read a lot more and deliberated with myself to figure out what is really going on. I think this technology has immense power, and we are not discussing it with the seriousness and trepidation it deserves. 
+I am a computer science major who’s been fascinated by neural networks — the basis of every interesting AI you see — ever since first learning about them. Over the past few months, I’ve read a lot more and deliberated with myself to figure out what is really going on. I think this technology has immense power, and we are not discussing it with the seriousness and trepidation it deserves. 
 
-If we define transformative AI as systems which can truly automate all things humans do and beyond, it would not be a new fad or a just a cool new product. It would have a dramatic impact on every area of life. It would significantly improve human health, lifespan and well-being. It would revamp all of science. It's course of development would influence the balance of national powers. I'm saying it is possible to create such systems, and that actually we could be approaching such technology in the coming decades.
+If we define transformative AI as systems which can truly automate all things humans do and beyond, it would not be a new fad or just a cool new product. It would have a dramatic impact on every area of life. It would significantly improve human health, lifespan and well-being. It would revamp all of science. Its course of development would influence the balance of national powers. I'm saying it is possible to create such systems, and that actually we could be approaching such technology in the coming decades.
 
 Such a claim requires justification. In this post, I will try to lay down bedrock arguments for the possibility of such a radical future. I have linked to resources from where I learned myself. This also allows me to link to many good resources I’ve wanted to share for a long time. Please zoom in on any claims you are interested in by checking them out.
 
@@ -23,7 +23,7 @@ Apologies for the em dashes in advance — no idea where I picked them up ;)
 
 ![Turing Machine in Nature](/assets/images/blog/TM_in_nature.webp)
 
-Did you know that [our ears perform a specific algorithm called Fourier Transform to understand sound](https://youtu.be/Gc5eICzHkFU?feature=shared&t=390)? Fourier Transform is a process that decomposes sound (or any signal actually) into its constituent frequencies. It's not necessary to understand how it works (although it is an elegant concept), but it's interesting how it’s such a universal idea. It’s not just something that humans came up with, it also emerged from nature and got embedded in our physical ears via evolutionary pressures. The important takeaway here, is is possible to process signals digitally by running an algorithm which performs Fourier Transform on a computer.
+Did you know that [our ears perform a specific algorithm called Fourier Transform to understand sound](https://youtu.be/Gc5eICzHkFU?feature=shared&t=390)? Fourier Transform is a process that decomposes sound (or any signal actually) into its constituent frequencies. It's not necessary to understand how it works (although it is an elegant concept), but it's interesting how it’s such a universal idea. It’s not just something that humans came up with, it also emerged from nature and got embedded in our physical ears via evolutionary pressures. The important takeaway here is that it is possible to process signals digitally by running an algorithm which performs Fourier Transform on a computer.
 
 What natural processes can we find algorithms for? For what processes can we not? Answering this question reveals what is possible with computers.
 
@@ -31,7 +31,7 @@ There is something all processes in nature share: all of them must [conform to t
 
 Thinking deeply about these limitations allowed Alan Turing to conceptualize the Turing Machine — the theoretical precursor of our modern computers. It led him and his advisor to claim what we now call the Church Turing Thesis: every process in nature can be simulated by a computer. This theory laid the foundations for all of computer science. It’s why our silicon processors can run any algorithm that can be described. 
 
-So computers are powerful things. The thesis implies that it is possible to simulate intelligence — or whatever you call the processes that happen inside the brain — in computers. All of the revolution of computers until the 2010s came through novel algorithms manually discovered and explicitly described by computer scientists. However, many crucial tasks, including basic things like recognizing objects in images (which biological brains do regularly on the fly) could not be cracked with manually designed algorithms. 
+So computers are powerful things. The thesis implies that it is possible to simulate intelligence — or whatever you call the processes that happen inside the brain — in computers. All of the revolution of computers until the 2010s came through novel algorithms manually discovered and explicitly described by computer scientists. However, many crucial tasks, including basic things like recognizing objects in images (which biological brains do regularly on the fly), could not be cracked with manually designed algorithms. 
 
 ## 2. Neural Networks
 
@@ -57,7 +57,7 @@ Do not underestimate the power of algorithms. Civilisation is the product of hum
 
 ![Some Domains AI Can Solve](/assets/images/blog/some_domains_AI_can_solve.webp)
 
-This is the most straightforward argument — AI capabilities have emerged at breakneck speed since the last 13 years. We went from simple detection tasks like classifying objects in images and speech recognition to high bandwidth tasks like image generation and language translation in about 4-5 years.  
+This is the most straightforward argument — AI capabilities have emerged at breakneck speed over the last 13 years. We went from simple detection tasks like classifying objects in images and speech recognition to high-bandwidth tasks like image generation and language translation in about 4-5 years.  
 
 In 2017, DeepMind’s AlphaGo beat the then Go world champion Lee Sedol. This was very notable because the game tree for Go expands intractably quickly so future moves cannot be calculated by brute force, like you can with chess. By 2019, OpenAI Five defeated Dota2 world champions, a long horizon game with tens of thousands of actions. 
 
@@ -65,9 +65,9 @@ In 2020, DeepMind’s AlphaFold 2 [solved the protein folding problem](https://w
 
 By this time, OpenAI had trained GPT-3, an expensive bet entirely made on the fact that [model performance scales smoothly with model size, dataset size, and the amount of compute used for training](https://www.youtube.com/watch?v=5eqRuVp65eY) for many orders of magnitude. In March of 2022, they figured out how to train language models to follow instructions with human feedback, a crucial step in making them follow a user's intent. They hosted ChatGPT in November of that year. It was the fastest growing app of all time, acquiring 100 million users in 2 months.
 
-Yes, language models suffer from hallucinations. But have you tried the recent releases? I’d argue hallucinations have decreased significantly, and reliability is being worked on actively. We must not fall into the “god of the gaps” fallacy for AI. Despite some unreliability though, they’ve unlocked a whole wave of new capabilities along reasoning, coding and mathematics. Claude code in action is a sight to behold. And both OpenAI and DeepMind have recently developed advanced models that achieve gold medal at the International Mathematical Olympiad [^5]. 
+Yes, language models suffer from hallucinations. But have you tried the recent releases? I’d argue hallucinations have decreased significantly, and reliability is being worked on actively. We must not fall into the “god of the gaps” fallacy for AI. Despite some unreliability though, they’ve unlocked a whole wave of new capabilities along reasoning, coding and mathematics. Claude Code in action is a sight to behold. And both OpenAI and DeepMind have recently developed advanced models that achieve a gold medal at the International Mathematical Olympiad [^5]. 
 
-It is astonishing to look back and see how much we have achieved in every imaginable domain, all in about a decade. Even more surprisingly, the core idea has remained the same. Often times one does not even need to change the model architecture even as they change the domain — discovering a new design for one task has a ripple effect over progress in all other tasks.   
+It is astonishing to look back and see how much we have achieved in every imaginable domain, all in about a decade. Even more surprisingly, the core idea has remained the same. Oftentimes one does not even need to change the model architecture as they change the domain — discovering a new design for one task has a ripple effect over progress in all other tasks.   
 
 ## Impact
 
@@ -75,11 +75,11 @@ Powerful technology enhances the contrast on all aspects of life, the good and t
 
 Neural networks can bring to fruition the long-held promise of computers. The models have already [started to automate some tasks](https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/), and we are using them to rush headlong towards humanity’s biggest challenges. Neural networks will unprecedentedly catalyze research in robotics, material science, biotechnology, industrial automation, and they will allow us to approach the most intriguing mysteries of the universe, all in the coming decades. We could very well be standing at the beginning of a new era. Nothing is off the table. 
 
-Unfortunately, our human problems remain. AI is a technology fit for concentration of power. Only our skills give us a leverage over the economy, and it is likely we will lose this leverage to computers. We need to rewrite the social contract such that it works for everybody independent of their input to the economy. We also need to get our act together on international cooperation so as to avoid a deadly AI arms race fueling autonomous militarization. The torch of liberty must be kept blazing. 
+Unfortunately, our human problems remain. AI is a technology fit for concentration of power. Only our skills give us leverage over the economy, and it is likely we will lose this leverage to computers. We need to rewrite the social contract such that it works for everybody independent of their input to the economy. We also need to get our act together on international cooperation so as to avoid a deadly AI arms race fueling autonomous militarization. The torch of liberty must be kept blazing. 
 
-And although we can create highly robust models from a well understood training process, [we do not know how to get proven guarantees](https://arxiv.org/pdf/2412.14093) over how a neural network will behave. There is a massive amount of fundamental science yet to be done on neural networks. We need to ensure our methods of aligning AI scale faster than the capabilities — we must have a provable way to retain control in a world where human beings are not the smartest entities.
+And although we can create highly robust models from a well-understood training process, [we do not know how to get proven guarantees](https://arxiv.org/pdf/2412.14093) over how a neural network will behave. There is a massive amount of fundamental science yet to be done on neural networks. We need to ensure our methods of aligning AI scale faster than the capabilities — we must have a provable way to retain control in a world where human beings are not the smartest entities.
 
-If this future is anywhere near us, our time is short. But if we can identify and diffuse the landmines together, what’s on the other side is beautiful and worth fighting for.  
+If this future is anywhere near us, our time is short. But if we can identify and defuse the landmines together, what’s on the other side is beautiful and worth fighting for.  
 
 ## Resources and Further Reading
 

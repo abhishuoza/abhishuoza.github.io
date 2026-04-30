@@ -10,4 +10,4 @@ sort_order: reverse
 author_profile: true
 ---
 
-A selection of my machine learning and AI projects.
+Some neat demos for my machine learning projects.

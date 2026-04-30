@@ -255,8 +255,8 @@ classes: wide
         <div class="ddpm-hint">
           Sweet spot for reliable digit generation: <strong>CFG ≈ 1–2</strong>,
           <strong>10–25 steps</strong>. Push either higher and you'll often see
-          the sample converge to the right digit and then drift into a different
-          , often mixed shape.
+          the sample converge to the right digit and then drift into a
+          different, often mixed shape.
         </div>
       </div>
     </div>
