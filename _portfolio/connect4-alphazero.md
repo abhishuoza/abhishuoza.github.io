@@ -328,9 +328,9 @@ classes: wide
     <div class="c4-control">
       <label for="c4-difficulty">Difficulty</label>
       <select id="c4-difficulty">
-        <option value="easy">Easy (50 sims)</option>
-        <option value="medium" selected>Medium (150 sims)</option>
-        <option value="hard">Hard (400 sims)</option>
+        <option value="easy">Easy (25 sims)</option>
+        <option value="medium" selected>Medium (50 sims)</option>
+        <option value="hard">Hard (100 sims)</option>
       </select>
     </div>
     <div class="c4-control">

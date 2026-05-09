@@ -1,7 +1,7 @@
 import { Connect4, ROWS, COLS } from "./game.js";
 import { MCTS, predictNet } from "./mcts.js";
 
-const SIM_COUNTS = { easy: 50, medium: 150, hard: 400 };
+const SIM_COUNTS = { easy: 25, medium: 50, hard: 100 };
 const MODEL_URL = "/assets/models/connect4.onnx";
 const WASM_BASE = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/";
 
