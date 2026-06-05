@@ -64,6 +64,9 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:path/
+  research:
+    output: true
+    permalink: /:collection/:path/
 
 # Front Matter Defaults
 defaults:
@@ -92,6 +95,15 @@ defaults:
       layout: single
       author_profile: false
       share: true
+  # Research
+  - scope:
+      path: ""
+      type: research
+    values:
+      layout: single
+      author_profile: false
+      share: true
+      read_time: true
 
 # Pagination
 paginate: 5
