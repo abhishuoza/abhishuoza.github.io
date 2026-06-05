@@ -125,6 +125,10 @@ An interesting direction to explore is how confession honesty generalizes across
 
 Further work can also be done by generalising the concept. "Clean channel" training for any particular property when it is not competing with other output incentives could allow for clearer measurement of the property.
 
-## Reference
+## References
 
 Manas Joglekar, Jeremy Chen, Gabriel Wu, Jason Yosinski, Jasmine Wang, Boaz Barak, and Amelia Glaese. *Training LLMs for Honesty via Confessions*. arXiv:2512.08093, December 2025. [https://arxiv.org/abs/2512.08093](https://arxiv.org/abs/2512.08093)
+
+Qwen Team. *Qwen3 Technical Report*. arXiv:2505.09388, May 2025. [https://arxiv.org/abs/2505.09388](https://arxiv.org/abs/2505.09388)
+
+Team Olmo (Allen Institute for AI). *Olmo 3*. arXiv:2512.13961, December 2025. [https://arxiv.org/abs/2512.13961](https://arxiv.org/abs/2512.13961)
