@@ -129,6 +129,8 @@ Further work can also be done by generalising the concept. "Clean channel" train
 
 Manas Joglekar, Jeremy Chen, Gabriel Wu, Jason Yosinski, Jasmine Wang, Boaz Barak, and Amelia Glaese. *Training LLMs for Honesty via Confessions*. arXiv:2512.08093, December 2025. [https://arxiv.org/abs/2512.08093](https://arxiv.org/abs/2512.08093)
 
+Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, et al. *DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models*. arXiv:2402.03300, 2024. [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300)
+
 Qwen Team. *Qwen3 Technical Report*. arXiv:2505.09388, May 2025. [https://arxiv.org/abs/2505.09388](https://arxiv.org/abs/2505.09388)
 
 Team Olmo (Allen Institute for AI). *Olmo 3*. arXiv:2512.13961, December 2025. [https://arxiv.org/abs/2512.13961](https://arxiv.org/abs/2512.13961)
