@@ -12,6 +12,19 @@ url: "https://abhishuoza.github.io"
 baseurl: ""
 repository: "abhishuoza/abhishuoza.github.io"
 
+# SEO / social identity (jekyll-seo-tag). The social.links become sameAs in the
+# generated JSON-LD, reinforcing that this site is the canonical "Abhishu Oza" page.
+logo: "/assets/images/profile.jpg"
+og_image: "/assets/images/profile.jpg"
+social:
+  type: Person
+  name: "Abhishu Oza"
+  links:
+    - "https://github.com/abhishuoza"
+    - "https://www.linkedin.com/in/abhishu-oza"
+    - "https://scholar.google.com/citations?user=YGJ6XlsAAAAJ"
+# google_site_verification: "PASTE_CODE_FROM_SEARCH_CONSOLE"  # uncomment after verifying in GSC
+
 # Site Search
 search: true
 search_provider: lunr

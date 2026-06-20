@@ -1,3 +1,31 @@
+{% comment %} Person structured data. Helps Google resolve searches for "Abhishu Oza" to this
+site by linking all profiles into one entity via sameAs. Emitted site-wide. {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Abhishu Oza",
+  "url": "https://abhishuoza.github.io",
+  "image": "https://abhishuoza.github.io/assets/images/profile.jpg",
+  "jobTitle": "Machine Learning Researcher and Engineer",
+  "description": "MS Computer Science student at Rutgers University working on AI safety, LLM post-training, and interpretability.",
+  "affiliation": { "@type": "CollegeOrUniversity", "name": "Rutgers University" },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "Rutgers University" },
+    { "@type": "CollegeOrUniversity", "name": "Ahmedabad University" }
+  ],
+  "knowsAbout": [
+    "AI safety", "AI alignment", "Chain-of-thought monitorability",
+    "LLM post-training", "Reinforcement learning", "Mechanistic interpretability"
+  ],
+  "sameAs": [
+    "https://github.com/abhishuoza",
+    "https://www.linkedin.com/in/abhishu-oza",
+    "https://scholar.google.com/citations?user=YGJ6XlsAAAAJ"
+  ]
+}
+</script>
+
 {% if page.math %}
 <script>
   window.MathJax = {
