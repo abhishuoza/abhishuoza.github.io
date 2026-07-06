@@ -45,7 +45,15 @@ Training is set up as a dual-span GRPO. A smaller language model (Qwen3-4B-Instr
 
 The hack was elicited in the model via an instruction in the prompt: In the task prompt, I ask the model to report each sentence's word count in parentheses, for example, "The cat sat on the mat (6)". The idea is that the weak judge for the original task trusts the end label, which is exploitable by the larger model (the paper mentions this hack but does not mention such an instruction being put in the task prompt). The tradeoff is that the model uses the requested target number in the end bracket (either out of confusion or knowingly) even before training.
 
-The reason for this instruction is that I was unable to elicit the bracket-hack over the training, which is how we would want it to naturally emerge. In fact, manufacturing the reward hack over the course of task training turned out to be the hardest part to replicate at this scale. I've elaborated on the [difficulties in a later section](#difficulties-in-eliciting-aware-reward-hacking).
+## Differences from the original setup
+
+This reproduction deviates from the paper in following ways.
+
+1. The confession reward used here is the programmatic ground truth itself, not an LLM judge, as opposed to the paper where a weakened LLM judge scores both the task and confession channels. This is clearer for measuring if honesty is learnable, but removes the possibility of the model learning to fool the confession judge.
+
+2. Confessions here are trained on a single task with 100% of rollouts as opposed to 25% of rollouts from a large diversity of tasks in the paper. Future work, especially on out of distribution generalisation should include this.
+
+3. The hack was elicited via instruction in the prompt. The reason for this instruction is that I was unable to elicit the bracket-hack over the training, which is how we would want it to naturally emerge. In fact, manufacturing the reward hack over the course of task training turned out to be the hardest part to replicate at this scale. I've elaborated on the [difficulties in a later section](#difficulties-in-eliciting-aware-reward-hacking).
 
 ## Reproduction
 
@@ -121,7 +129,7 @@ I switched back to Word Count, and finally settled on elicitation via instructio
 
 Getting a better pre-hack checkpoint will be essential to do further work on confessions at this scale. Maybe I am missing something simple here but I could not understand what it is.
 
-An interesting direction to explore is how confession honesty generalizes across tasks. Can honesty survive on out of distribution tasks, ones never seen during training? More approaches that clearly separate out verification ability from task hacking will also help get a better picture.
+An interesting direction to explore is how confession honesty generalises across tasks. Can honesty survive on out of distribution tasks, ones never seen during training? More approaches that clearly separate out verification ability from task hacking will also help get a better picture.
 
 Further work can also be done by generalising the concept. "Clean channel" training for any particular property when it is not competing with other output incentives could allow for clearer measurement of the property.
 
