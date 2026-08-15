@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Site customizations shared by every skin.
+   Imported by assets/css/main.scss (light) and assets/css/dark.scss (dark),
+   so anything colour-dependent here must go through a Sass variable rather
+   than a literal, or the dark build will inherit light-mode colours.
+   ========================================================================== */
+
+/* Keep the author sidebar fully bright at all times (no hover fade). */
+.sidebar {
+  @include breakpoint($large) {
+    opacity: 1;
+  }
+}
+
+/* Author avatar: larger than the theme's 110px cap, centred in the sidebar
+   column. Below $large the theme sets it beside the name, so leave that alone. */
+.author__avatar {
+  @include breakpoint($large) {
+    text-align: center;
+  }
+
+  img {
+    @include breakpoint($large) {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+}
+
+/* Name sits under the centred avatar, so centre it to match. */
+.author__name {
+  @include breakpoint($large) {
+    text-align: center;
+  }
+}
+
+/* Dark-mode toggle, injected into .masthead__inner-wrap (a flex row) by
+   _includes/head/custom.html. Sitting outside nav.greedy-nav matters: the
+   theme's greedy-nav measures its own width to decide how many links fit,
+   and a sibling shrinks that width automatically. */
+.theme-toggle {
+  flex: 0 0 auto;
+  align-self: center;
+  /* 44px keeps the tap target usable on phones, where this is the last item
+     in a row that already holds the search and menu buttons. */
+  min-width: 44px;
+  height: 44px;
+  margin-left: 0.25rem;
+  padding: 0;
+  border: 0;
+  outline: none;
+  color: $primary-color;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    color: mix(#000, $primary-color, 25%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: -2px;
+  }
+}
+
+/* --------------------------------------------------------------------
+   Scope: individual post/project pages only (layout--single).
+   Archives, home, and portfolio index keep the Minimal Mistakes defaults.
+   -------------------------------------------------------------------- */
+.layout--single {
+  /* Single post/project pages have no author sidebar, so let .page
+     span the full wrapper width with no floated layout. */
+  .page {
+    float: none;
+    @include breakpoint($large) {
+      width: 100%;
+      padding-right: 0;
+    }
+    @include breakpoint($x-large) {
+      width: 100%;
+      padding-right: 0;
+    }
+  }
+
+  /* Cap the reading column for comfortable line length
+     and center it within the wrapper. */
+  .page__inner-wrap {
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+  }
+
+  /* Typography: match the original site's fixed 16px-root sizing.
+     Minimal Mistakes scales root up to 22px on large screens, which
+     made 1.1rem render far too large. Using px locks it to the
+     original's exact rendering. */
+  .page__content {
+    font-size: 17.6px;
+    line-height: 1.8;
+    color: $content-text-color;
+
+    p, li {
+      font-size: 17.6px;
+      line-height: 1.8;
+    }
+
+    p { margin-bottom: 20px; }
+
+    h1 { font-size: 40px; margin-top: 40px; margin-bottom: 20px; line-height: 1.3; }
+    h2 { font-size: 32px; margin-top: 40px; margin-bottom: 20px; line-height: 1.3; }
+    h3 { font-size: 24px; margin-top: 30px; margin-bottom: 15px; line-height: 1.3; }
+
+    img {
+      border-radius: 6px;
+      margin: 1.5em 0;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------
+   Index / listing pages (home recent posts, research, projects, blog).
+   List-layout entries (research, home) default to a much larger title
+   than grid-layout entries (projects); pin them all to one compact size
+   so the listings read consistently. Selectors match the theme's
+   .grid__item / .list__item specificity so these win in the cascade.
+   -------------------------------------------------------------------- */
+.archive__item-title,
+.list__item .archive__item-title,
+.grid__item .archive__item-title {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 0.35em;
+  line-height: 1.35;
+}
+
+.archive__item-excerpt,
+.archive__item-excerpt p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Markdown that sits directly in the archive wrapper (the Research page's
+   Publications/Writeups headings, intro line, and citation), kept from
+   ballooning to the default archive heading size. */
+.archive > h2 {
+  font-size: 22px;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  line-height: 1.3;
+}
+
+.archive > p {
+  font-size: 16.5px;
+  line-height: 1.7;
+}

@@ -292,6 +292,28 @@ classes: wide
 .c4-go-win { color: #059669; }
 .c4-go-lose { color: #dc2626; }
 .c4-go-draw { color: var(--c4-ink-muted); }
+
+/* Dark mode. The widget has no card of its own, so it sits straight on the
+   page background and needs its own surfaces rather than inheriting them. */
+[data-theme="dark"] #c4-app {
+  --c4-board-bg: #2f3540;
+  --c4-cell-empty: #1e222b;
+  --c4-border: #51555d;
+  --c4-ink: #eaeaea;
+  --c4-ink-muted: #a3a9b4;
+}
+[data-theme="dark"] .c4-nerdy,
+[data-theme="dark"] .c4-game-over { background: #2f3540; }
+[data-theme="dark"] .c4-sim-bar,
+[data-theme="dark"] .c4-policy-outer,
+[data-theme="dark"] .c4-value-meter { background: #1e222b; }
+[data-theme="dark"] .c4-value-meter::before { background: #51555d; }
+[data-theme="dark"] .c4-control select { background: #1e222b; color: var(--c4-ink); }
+[data-theme="dark"] .c4-status-win,
+[data-theme="dark"] .c4-go-win { color: #34d399; }
+[data-theme="dark"] .c4-status-lose,
+[data-theme="dark"] .c4-status-err,
+[data-theme="dark"] .c4-go-lose { color: #f87171; }
 </style>
 
 <div id="c4-app">

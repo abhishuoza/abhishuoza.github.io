@@ -198,6 +198,20 @@ classes: wide
   line-height: 1.45;
   margin-top: 0.2rem;
 }
+
+/* Dark mode. The widget has no card of its own, so it sits straight on the
+   page background and needs its own surfaces rather than inheriting them. */
+[data-theme="dark"] #ddpm-app {
+  --ddpm-border: #51555d;
+  --ddpm-ink: #eaeaea;
+  --ddpm-ink-muted: #a3a9b4;
+  --ddpm-accent: #8b5cf6;
+  --ddpm-accent-soft: #3b3355;
+  --ddpm-err: #f87171;
+}
+[data-theme="dark"] .ddpm-digit,
+[data-theme="dark"] .ddpm-regen { background: #2f3540; }
+[data-theme="dark"] .ddpm-progress { background: #1e222b; }
 </style>
 
 <div id="ddpm-app">

@@ -1,0 +1,26 @@
+---
+search: false
+---
+
+/* ==========================================================================
+   Dark mode.
+
+   A second full build of the theme using Minimal Mistakes' own "dark" skin.
+   It loads after main.css with media="not all" and the toggle in
+   _includes/head/custom.html flips that to media="all", so switching skins
+   costs no reload and needs no hand-maintained colour overrides.
+   ========================================================================== */
+
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/dark";
+@import "minimal-mistakes";
+
+$content-text-color: $text-color;
+
+@import "site-custom";
+
+/* Native controls (checkboxes, selects, scrollbars) follow the page, not the OS. */
+:root {
+  color-scheme: dark;
+}

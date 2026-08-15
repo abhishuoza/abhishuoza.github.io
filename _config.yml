@@ -14,7 +14,8 @@ repository: "abhishuoza/abhishuoza.github.io"
 
 # SEO / social identity (jekyll-seo-tag). The social.links become sameAs in the
 # generated JSON-LD, reinforcing that this site is the canonical "Abhishu Oza" page.
-logo: "/assets/images/profile.jpg"
+# site.logo is deliberately unset: Minimal Mistakes renders it as a thumbnail
+# next to the site title in the masthead, which duplicates the sidebar avatar.
 og_image: "/assets/images/profile.jpg"
 social:
   type: Person

@@ -26,6 +26,63 @@ site by linking all profiles into one entity via sameAs. Emitted site-wide. {% e
 }
 </script>
 
+{% comment %} Dark mode. dark.css is the whole theme rebuilt with Minimal Mistakes' "dark"
+skin; toggling its media attribute swaps skins with no reload. The state is applied here,
+in <head>, so the light theme never flashes before the script runs. {% endcomment %}
+<link rel="stylesheet" href="{{ '/assets/css/dark.css' | relative_url }}" id="theme-dark-css" media="not all">
+<script>
+  (function () {
+    var stored = null;
+    try { stored = window.localStorage.getItem("theme"); } catch (e) {}
+
+    window.setSiteTheme = function (isDark) {
+      document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+      var link = document.getElementById("theme-dark-css");
+      if (link) link.media = isDark ? "all" : "not all";
+    };
+
+    window.setSiteTheme(
+      stored ? stored === "dark"
+             : window.matchMedia("(prefers-color-scheme: dark)").matches
+    );
+  })();
+</script>
+
+<script>
+  {% comment %} The toggle goes in .masthead__inner-wrap rather than inside nav.greedy-nav:
+  greedy-nav measures its own width to decide how many links fit, and a flex sibling shrinks
+  that width for it. This runs before the theme's jQuery ready handler, so greedy-nav's first
+  measurement already accounts for the button. {% endcomment %}
+  document.addEventListener("DOMContentLoaded", function () {
+    var wrap = document.querySelector(".masthead__inner-wrap");
+    if (!wrap) return;
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "theme-toggle";
+    btn.innerHTML = '<i class="fas fa-fw" aria-hidden="true"></i>';
+    var icon = btn.querySelector("i");
+
+    function sync() {
+      var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      icon.className = isDark ? "fas fa-fw fa-sun" : "fas fa-fw fa-moon";
+      btn.title = isDark ? "Switch to light mode" : "Switch to dark mode";
+      btn.setAttribute("aria-label", btn.title);
+      btn.setAttribute("aria-pressed", isDark ? "true" : "false");
+    }
+
+    btn.addEventListener("click", function () {
+      var isDark = document.documentElement.getAttribute("data-theme") !== "dark";
+      window.setSiteTheme(isDark);
+      try { window.localStorage.setItem("theme", isDark ? "dark" : "light"); } catch (e) {}
+      sync();
+    });
+
+    sync();
+    wrap.appendChild(btn);
+  });
+</script>
+
 {% if page.math %}
 <script>
   window.MathJax = {

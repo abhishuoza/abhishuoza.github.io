@@ -29,6 +29,8 @@ classes: wide
   margin-bottom: 2rem;
   text-align: center;
 }
+/* The caption sits on the page background, not inside the player card. */
+[data-theme="dark"] .docrag-cast-caption { color: #a3a9b4; }
 </style>
 
 DocRAG is a small tool that generates code grounded in live, up-to-date documentation instead of whatever the model happened to see during training. Point it at any docs URL, and it scrapes, chunks, embeds, retrieves the relevant sections, and feeds them to the LLM of your choice as context.

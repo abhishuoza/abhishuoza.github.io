@@ -38,6 +38,8 @@ classes: wide
 .grpo-plot-caption {
   font-size: 0.82rem; color: #6b7280; margin: 0.2rem 0 2rem; text-align: center;
 }
+/* The caption sits on the page background, not inside the plot card. */
+[data-theme="dark"] .grpo-plot-caption { color: #a3a9b4; }
 
 .grpo-compare {
   display: grid;
